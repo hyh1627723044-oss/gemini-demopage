@@ -63,7 +63,8 @@ const App: React.FC = () => {
 
           setMessages(prevMessages => {
             // Limit total messages on screen to prevent DOM overload
-            if (prevMessages.length > 20) {
+            // Increased limit to 40 for denser feel
+            if (prevMessages.length > 40) {
               const [, ...remaining] = prevMessages;
               return [...remaining, newMessage];
             }
@@ -83,7 +84,7 @@ const App: React.FC = () => {
 
           return rest;
         });
-      }, 1500); // New message every 1.5 seconds
+      }, 600); // New message every 600ms (0.6 seconds) for higher density
     } else {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -160,7 +161,7 @@ const App: React.FC = () => {
           {appState === AppState.RUNNING ? <Pause size={20} /> : <Play size={20} />}
         </button>
       </div>
-
+·
       {/* Main Message Layer */}
       <div className="relative w-full h-full pointer-events-none">
         {messages.map(msg => (
